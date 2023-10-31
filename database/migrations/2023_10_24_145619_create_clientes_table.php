@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('direccion');
             $table->string('email');
             $table->string('phone');
-            $table->string('tipopago');
+            $table->foreignId('pagos_id')->constrained('pagos')->cascadeOnUpdate();
+            $table->foreignId('origen_id')->constrained('origen')->cascadeOnUpdate();
             $table->timestamps();
             $table->delete_at();
         });

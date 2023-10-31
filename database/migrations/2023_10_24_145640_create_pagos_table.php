@@ -13,12 +13,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pagos', function (Blueprint $table) {
+        Schema::create('pagos', function (Blueprint $table)
+        {
             $table->id();
             $table->string('tipo');
             $table->date('fechapago');
+            $table->foreignId('clientes_id')->constrained('clientes')->cascadeOnUpdate();
+            $table->foreignId('tipodepago_id')->constrained('tipodepago')->cascadeOnUpdate();
+            $table->foreignId('origen_id')->constrained('origen')->cascadeOnUpdate();
             $table->timestamps();
-            $table->softDeletes();
+            $table->delete_at();
         });
     }
 
